@@ -1,0 +1,48 @@
+
+<?php
+  include 'header.php';
+  include_once 'databaseconnection.php';
+ ?>
+<body>
+
+
+<div class="wrapper">
+  <?php
+    if (isset($_SESSION['useremail'])) {
+      echo "<p>You're logged In</p>";
+    } else{
+      echo "<p> You're logged OUT</p>";
+
+    }
+
+  ?>
+  <div class="listings-box">
+
+
+    <?php
+      $sql= "SELECT * FROM listings";
+      $result= mysqli_query($conn, $sql);
+      $queryResults = mysqli_num_rows($result);
+      if ($queryResults>0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<div class='listings'>
+           <a class='list-anchor' href='listing.php?dw=".$row['user_id']."'><h>".$row['user_uid']."</h></a><br>
+          <p>".$row['about']."</p><br>
+          <p>£".$row['investment']."</p><br>
+          <p>".$row['percentage']."%</p><br>
+
+
+
+          </div>";
+        }
+      }else{
+        echo "no listings";
+      }
+     ?>
+     </div>
+  </div>
+</div>
+</body>
+<script type="text/javascript">
+  document.body.innerHTML = "yo g"
+</script>
